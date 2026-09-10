@@ -10,7 +10,12 @@ def render(concepts,out,font,colors=None):
     for c in concepts:
         safe_id(c['id']);image=Image.new('RGB',(1080,1350),bg);d=ImageDraw.Draw(image)
         small=ImageFont.truetype(str(font),34);body=ImageFont.truetype(str(font),44);large=ImageFont.truetype(str(font),78)
-        d.text((80,90),c['brand'],font=small,fill=ink);d.line((80,165,1000,165),fill=accent,width=3)
+        brand_font=small
+        for size in range(34,21,-1):
+            brand_font=ImageFont.truetype(str(font),size)
+            if d.textlength(c['brand'],font=brand_font)<=900:break
+        else:raise ValueError('Brand name too long for the image header')
+        d.text((80,90),c['brand'],font=brand_font,fill=ink);d.line((80,165,1000,165),fill=accent,width=3)
         # Wrap by measured width, including Thai without spaces. Layout is verified before writing.
         lines=[];current=''
         for ch in c['headline']:

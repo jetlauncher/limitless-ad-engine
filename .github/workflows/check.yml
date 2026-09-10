@@ -1,20 +1,27 @@
 name: Check pipeline
 on: [push, pull_request, workflow_dispatch]
+env:
+  PYTHONUTF8: "1"
 permissions:
   contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python install.py
+      - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python student.py check
       - run: python student.py build --out dist
       - uses: actions/upload-artifact@v4
         with:
-          name: gallery-preview
+          name: gallery-preview-${{ matrix.os }}
           path: dist/
           retention-days: 7

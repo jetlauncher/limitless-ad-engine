@@ -4,7 +4,39 @@
 
 [สร้าง repo ของฉันจาก Template](https://github.com/new?template_name=limitless-ad-engine&template_owner=jetlauncher) · [Google Doc คู่มือฉบับเต็ม](https://docs.google.com/document/d/1YpCwbuapteto5hN3khbKXZSGM7SilnHIjr4s4B4REbc/edit) · [คู่มือกระบวนการใน repo](docs/PROCESS-TH.md)
 
-## เริ่มใน 4 ขั้น
+## Clone → Install → Run
+
+ติดตั้ง Git และ Python 3.11 ขึ้นไปก่อน จากนั้นรันบน macOS / Linux:
+
+```sh
+git clone https://github.com/jetlauncher/limitless-ad-engine.git
+cd limitless-ad-engine
+python3 install.py
+python3 start.py
+```
+
+Windows ใช้ `py install.py` และ `py start.py` แทน `python3` การติดตั้งใช้ Internet โหลด Pillow ลง `.venv` แยกจาก Python หลัก ฟอนต์ Sarabun พร้อม license รวมไว้แล้ว
+
+ครั้งแรกโปรแกรมจะถามชื่อธุรกิจ ลูกค้า สินค้า ข้อเสนอ ปัญหาลูกค้า จุดต่าง หลักฐาน CTA ลิงก์ปลายทาง น้ำเสียง และเป้าหมาย จากนั้นให้เพิ่มบริบทที่มีอยู่ นำเข้าไฟล์ `.txt` / `.md` เลือกสีแบรนด์ ตลาด คู่แข่ง และแบรนด์ที่อยากเรียนรู้ได้
+
+ตอบครบแล้วจะสร้าง **ภาพ PNG และแคปชั่นร่าง 3 ชิ้น** ด้วยแบบข้อความบนเครื่อง และเปิด gallery ใน browser อัตโนมัติ ขั้นตอนนี้ไม่ใช้ AI และไม่เรียก paid scraper ไฟล์บริบทเก็บครบใน `creative-brief.json` เพื่อส่งต่อให้ AI เมื่อคุณเลือกใช้ แต่ยังไม่ได้วิเคราะห์ไฟล์เหล่านั้น
+
+คำตอบอยู่ใน `private/projects/…` ซึ่งไม่ขึ้น Git โดยอัตโนมัติ Raw context ไม่เข้าไฟล์เว็บที่ build เมื่อเปิด `python3 start.py` อีกครั้ง จะใช้โปรเจกต์ล่าสุดโดยไม่ถามใหม่ กด Ctrl+C เพื่อหยุด แก้ไฟล์แล้วรันใหม่เพื่อดูการเปลี่ยนแปลง
+
+```sh
+# สร้างอีกแบรนด์ โดยเก็บโปรเจกต์เก่าไว้
+python3 start.py --new
+
+# เปิดโปรเจกต์ที่เลือกเอง
+python3 start.py --project private/projects/YOUR-PROJECT
+
+# ตอบคำถามและบันทึก โดยยังไม่เปิดเว็บ
+python3 start.py --new --setup-only
+```
+
+หาก port 8767 ไม่ว่าง โปรแกรมจะเลือก port ถัดไปให้ ภาพเดิมจะไม่เปลี่ยนตามการแก้ caption ต้อง render ใหม่เมื่อแก้ตัวหนังสือบนภาพ ทุกชิ้นเริ่มเป็น draft ให้เติมปลายทางจริงแทน example.com แล้วตรวจภาพ ข้อเสนอและหลักฐานก่อน review/export
+
+## สร้าง repo ของตัวเอง / เปิดตัวอย่างเดิม
 
 1. กด **Use this template → Create a new repository** เลือกบัญชีตัวเอง ตั้งชื่อ เช่น `my-ad-library` และเลือก Private หากไม่ต้องการเปิด source ให้คนอื่น
 2. เปิด repo ของคุณใน Codex / Claude Code หรือ clone ลงเครื่อง ใช้ Python 3.11 ขึ้นไป
@@ -19,6 +51,8 @@ python3 student.py preview
 คุณเป็นเจ้าของสำเนานี้ การแก้ไขจะไม่กระทบ repo ของครูหรือเพื่อน คุณเพิ่มไฟล์ เปลี่ยนระบบ และนำไปใช้กับธุรกิจตัวเองได้ตาม MIT license
 
 ## อยากเปลี่ยนอะไร แก้ตรงไหน
+
+ตารางนี้อ้างอิงตัวอย่างใน `student/` หากใช้ guided setup ให้แก้ไฟล์ชื่อเดียวกันใน `private/projects/YOUR-PROJECT/` แทน ทุกคำสั่ง `student.py` รองรับ `--project private/projects/YOUR-PROJECT`
 
 | สิ่งที่ต้องการ | ไฟล์ |
 | --- | --- |
@@ -94,6 +128,8 @@ python3 engine.py scrape --watchlist student/watchlist.json
 
 ## นำเว็บของตัวเองขึ้น Vercel
 
+สำหรับโปรเจกต์ส่วนตัวจาก setup ใช้ `python3 student.py build --project private/projects/YOUR-PROJECT --out builds/my-gallery` แล้ว deploy เฉพาะโฟลเดอร์ผลลัพธ์ อย่า push ไฟล์บริบททั้งหมดขึ้น public repo ขั้นตอน import repo ด้านล่างใช้ข้อมูลใน `student/`
+
 รัน `python3 student.py check` ก่อน จากนั้น import **repo ของคุณ** เข้า Vercel ค่าที่เตรียมไว้จะ build จาก `student/` ไปยัง `dist/` โดยอัตโนมัติ ดู Preview Deployment แล้วค่อยเลือกเผยแพร่ เมื่อแก้ไฟล์และ push Vercel จะ build ตามการตั้งค่าของคุณ
 
 ```sh
@@ -111,5 +147,7 @@ build ต้องใช้โฟลเดอร์ใหม่ เว็บท�
 - Paid Apify/OpenAI adapters ยังไม่ได้ทดสอบด้วยการใช้เงินจริงในชุดส่งมอบนี้ ไม่มีระบบ refresh ตามเวลา แคมเปญอัตโนมัติ หรือการวัด ROAS
 
 ## License
+
+ฟอนต์ Sarabun มาจาก [Google Fonts](https://github.com/google/fonts/tree/main/ofl/sarabun) ภายใต้ [SIL Open Font License](fonts/OFL.txt) แยกจาก source code
 
 Source และเอกสารใช้ [MIT](LICENSE) นักเรียนแก้ไขและต่อยอดเชิงพาณิชย์ได้โดยเก็บ license notice ไว้ สิทธิ์นี้ไม่ครอบคลุมสื่อแบรนด์อื่น ภาพในคลังเก่า โลโก้ หน้าคน หรือฟอนต์ของบุคคลที่สาม

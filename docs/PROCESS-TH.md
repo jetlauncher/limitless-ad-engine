@@ -1,5 +1,29 @@
 # Limitless Ad Engine
 
+## เริ่มแบบ Guided Setup: Clone → Install → Run
+
+นักเรียนเปิด terminal แล้วรัน 4 บรรทัดนี้ (ต้องมี Git และ Python 3.11 ขึ้นไป):
+git clone https://github.com/jetlauncher/limitless-ad-engine.git
+cd limitless-ad-engine
+python3 install.py
+python3 start.py
+
+Windows ใช้ py install.py และ py start.py แทน python3 การติดตั้งสร้าง .venv แยกและโหลด Pillow ส่วนฟอนต์ Sarabun รวมไว้ใน repo พร้อม license แล้ว
+
+ครั้งแรกโปรแกรมจะถามชื่อธุรกิจ ลูกค้า สินค้า/ข้อเสนอ ปัญหาลูกค้า จุดต่าง หลักฐานจริง CTA ลิงก์ น้ำเสียง เป้าหมาย และบริบทเพิ่มเติม นำเข้าไฟล์ .txt / .md ที่มีอยู่ได้ จากนั้นเลือกสี ตลาด คู่แข่ง และแบรนด์ที่อยากเรียนรู้ พร้อมเหตุผลที่เลือกแต่ละแบรนด์
+
+ตอบครบแล้วได้ภาพ PNG 1080×1350 และแคปชั่นร่าง 3 ชิ้นจากแบบข้อความบนเครื่อง พร้อมเปิด gallery ใน browser ขั้นตอนนี้ไม่ใช้ AI และไม่ scrape ไฟล์บริบทเก็บครบเพื่อส่งต่อ AI แต่ยังไม่ได้วิเคราะห์เนื้อหาในไฟล์เหล่านั้น
+
+โปรเจกต์อยู่ใน private/projects/… ไม่ขึ้น Git โดยอัตโนมัติ แก้ brand.json, site.json, ads.json และ watchlist.json ในโฟลเดอร์นี้ ส่วน creative-brief.json เก็บบริบทกับแผนส่งต่อให้ AI ไม่มี raw context ในหน้า gallery ที่ build
+
+ครั้งต่อไปใช้ python3 start.py เพื่อเปิดโปรเจกต์ล่าสุด ใช้ python3 start.py --new เพื่อสร้างอีกแบรนด์โดยเก็บของเดิม หรือ python3 start.py --project private/projects/YOUR-PROJECT เพื่อเลือกโปรเจกต์เอง กด Ctrl+C เพื่อหยุดเว็บ แก้ไฟล์แล้วรันใหม่เพื่อดูการเปลี่ยนแปลง
+
+Meta page ID ข้ามได้ ถ้ายังไม่ทราบ ระบบจะเก็บชื่อและลิงก์ไว้โดยยังไม่เปิด scraping การกรอกชื่อแบรนด์ไม่ได้ยืนยันตัวตนเพจ ต้องตรวจ ID ก่อนใช้ขั้น scrape ในคู่มือ
+
+ทุกแอดที่ setup สร้างเป็น draft ต้องเติมลิงก์จริงแทน example.com และตรวจภาพ ข้อเสนอ หลักฐาน และสิทธิ์ก่อน review/export หากต้องการเผยแพร่ ให้ build จากโปรเจกต์ที่เลือกแล้ว deploy เฉพาะโฟลเดอร์ผลลัพธ์ อย่า push ไฟล์บริบททั้งหมดขึ้น public repo
+
+ทางเลือกเดิมด้านล่างยังใช้ได้: กด Use this template เพื่อเป็นเจ้าของ repo แล้ว clone สำเนาตัวเอง หรือเปิด student.py preview เพื่อดู 3 ตัวอย่างที่เตรียมไว้โดยไม่ตอบคำถาม
+
 ## เริ่มที่นี่: สร้างคลังแอดของธุรกิจคุณเอง
 
 Repo นี้เป็น Public GitHub Template นักเรียนกด Use this template → Create a new repository แล้วเลือกบัญชีตัวเอง ตั้งชื่อ repo และเลือก Private หรือ Public ได้ แต่ละคนมีสำเนาที่แก้ไขได้อิสระ การแก้ของคุณไม่กระทบครูหรือเพื่อน
