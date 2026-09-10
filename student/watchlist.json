@@ -1,0 +1,22 @@
+[
+  {
+    "id": "my-competitor",
+    "name": "คู่แข่งของธุรกิจคุณ",
+    "relationship": "competitor",
+    "country": "TH",
+    "page_id": "",
+    "identity_verified": false,
+    "enabled": false,
+    "limit": 30
+  },
+  {
+    "id": "my-inspiration",
+    "name": "แบรนด์ที่อยากเรียนรู้",
+    "relationship": "aspiration",
+    "country": "TH",
+    "page_id": "",
+    "identity_verified": false,
+    "enabled": false,
+    "limit": 30
+  }
+]

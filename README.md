@@ -1,111 +1,115 @@
-# Limitless Ad Engine
+# คลังแอดของคุณ — Limitless Ad Engine
 
-Research competitor and aspirational-brand ads → write original Thai concepts → render creatives → review → deliver caption-and-image packs through a student gallery.
+**นักเรียนแต่ละคนสร้าง repo ของตัวเอง แล้วแก้แบรนด์ ภาพ แคปชั่น และหน้าตาเว็บได้ทั้งหมด** เริ่มด้วยแอดตัวอย่าง 3 ชิ้น ใช้งานบนเครื่องได้โดยไม่ต้องมี API key
 
-This is a working local-first MVP, derived from [Limitless Ad System](https://github.com/jetlauncher/limitless-ad-system). The original live deployment is unchanged. No paid scraper, AI generation, ad campaign or production deployment is started by cloning or building this repository.
+[สร้าง repo ของฉันจาก Template](https://github.com/new?template_name=limitless-ad-engine&template_owner=jetlauncher) · [Google Doc คู่มือฉบับเต็ม](https://docs.google.com/document/d/1YpCwbuapteto5hN3khbKXZSGM7SilnHIjr4s4B4REbc/edit) · [คู่มือกระบวนการใน repo](docs/PROCESS-TH.md)
 
-## Start here
+## เริ่มใน 4 ขั้น
 
-[Full Thai Google Doc](https://docs.google.com/document/d/1YpCwbuapteto5hN3khbKXZSGM7SilnHIjr4s4B4REbc/edit) — reverse engineering, operator SOP, student workflow, review rules and rollout plan.
-
-Python 3.11 or later. The demo, pipeline and tests need no third-party packages.
-
-```sh
-git clone https://github.com/jetlauncher/limitless-ad-engine.git
-cd limitless-ad-engine
-python3 -m unittest discover -s tests -v
-python3 engine.py build --catalog examples/rendered/catalog.json --pack-root examples/rendered --legacy legacy/manifest.json --out builds/my-preview
-python3 -m http.server 8766 --bind 127.0.0.1 --directory builds/my-preview
-```
-
-Open http://localhost:8766. The demo contains 675 preserved legacy entries and three original, clearly marked training examples. Legacy media stays at its original public deployment; it is not bundled or granted a new license. Of the legacy records, 321 have captions and 354 do not. The three examples are not real offers and cannot pass the launch-export gate.
-
-## Complete process
-
-1. Create a local brand profile based on `examples/brand.json`. Supply the audience, actual offer, verified proof, CTA and real destination. Keep client data under `private/`.
-2. Copy `config/watchlist.example.json` into `private/watchlist.json`. Distinguish direct competitors from aspirational brands. Verify exact Meta page IDs before enabling entries.
-3. Preview the scrape request. The current actor uses `resultsLimit`, not the older `maxAds` parameter. Each brand is limited to 1–50 ads.
+1. กด **Use this template → Create a new repository** เลือกบัญชีตัวเอง ตั้งชื่อ เช่น `my-ad-library` และเลือก Private หากไม่ต้องการเปิด source ให้คนอื่น
+2. เปิด repo ของคุณใน Codex / Claude Code หรือ clone ลงเครื่อง ใช้ Python 3.11 ขึ้นไป
+3. เปิด terminal ในโฟลเดอร์ repo แล้วรัน:
 
 ```sh
-python3 engine.py scrape --watchlist private/watchlist.json
+python3 student.py preview
 ```
 
-4. After choosing a total batch spend cap, supply `APIFY_TOKEN` as an environment variable and execute. This command incurs Apify charges; there is no paid run in CI.
+4. เปิด **http://localhost:8767** จะเห็นตัวอย่าง 3 ชิ้น กด Ctrl+C เพื่อหยุด แก้ไฟล์ แล้วรันคำสั่งเดิมเพื่อดูเวอร์ชันใหม่
 
-```sh
-python3 engine.py scrape --watchlist private/watchlist.json --out runs/first-scrape --execute --budget-usd 2
-python3 engine.py collect --receipt runs/first-scrape/BRAND-run.json --out runs/first-collection
+คุณเป็นเจ้าของสำเนานี้ การแก้ไขจะไม่กระทบ repo ของครูหรือเพื่อน คุณเพิ่มไฟล์ เปลี่ยนระบบ และนำไปใช้กับธุรกิจตัวเองได้ตาม MIT license
+
+## อยากเปลี่ยนอะไร แก้ตรงไหน
+
+| สิ่งที่ต้องการ | ไฟล์ |
+| --- | --- |
+| ชื่อธุรกิจ ลูกค้า ข้อเสนอ CTA ลิงก์ปลายทาง หลักฐาน | `student/brand.json` |
+| ชื่อเว็บ ข้อความหน้าแรก สี | `student/site.json` |
+| หัวข้อ มุมขาย แคปชั่น และรายชื่อภาพแต่ละแอด | `student/ads.json` |
+| ภาพของคุณ | `student/assets/` |
+| คู่แข่งและแบรนด์ต้นแบบ | `student/watchlist.json` |
+| แอดอ้างอิงที่ผ่าน normalize | `student/references.json` |
+| จัดหน้าและเพิ่มปุ่ม | `web/index.html` |
+| รูปแบบ สี ขนาดตัวอักษร | `web/styles.css` |
+| ค้นหา ตัวกรอง และการทำงานของหน้าเว็บ | `web/app.js` |
+| ขั้นตอนเก็บแอด สร้างแพ็ก และส่งออก | `engine.py`, `student.py`, `scripts/` |
+
+ชื่อบนหน้าเว็บอยู่ใน `site.json` ส่วนชื่อที่ใช้ผลิตแอดอยู่ใน `brand.json` แก้ให้ตรงกัน เปลี่ยนข้อความในไฟล์ JSON ใช้ `\n` เพื่อขึ้นบรรทัดใหม่ อย่าลืมเครื่องหมายคำพูดและ comma
+
+**Prompt พร้อมใช้กับ AI coding assistant:**
+
+> อ่าน README.md และ AGENTS.md ก่อน ช่วยปรับโปรเจกต์นี้เป็นคลังแอดของธุรกิจ [ชื่อธุรกิจ] ขาย [สินค้า/บริการ] ให้ [ลูกค้า] ใช้สี [สี] และลิงก์ [URL] แก้ student/brand.json, site.json และ ads.json ให้สอดคล้องกัน ถ้าข้อมูลข้อเสนอหรือหลักฐานไม่พอให้ถามฉัน สร้างข้อความใหม่ 3 มุมขายโดยไม่แต่งรีวิวหรือผลลัพธ์ลูกค้า จากนั้นรัน python3 student.py check และเปิด preview ให้ฉันตรวจ
+
+## เพิ่มแอดและเปลี่ยนภาพ
+
+คัดลอกหนึ่ง object ใน `student/ads.json` ตั้ง `id` ใหม่ เช่น `my-ad-04` เปลี่ยน `title`, `headline`, `angle`, `caption` และ `images` ให้เป็นไฟล์ของคุณ ใส่ PNG ใน `student/assets/` เช่น `my-ad-04.png`
+
+รองรับ PNG ขนาด 1080×1080, 1080×1350 และ 1080×1920 สำหรับหลายภาพ ใส่ชื่อไฟล์ตามลำดับใน `images` ระบบคำนวณขนาดและ hash ให้เอง
+
+```json
+"images": ["my-ad-04-01.png", "my-ad-04-02.png"]
 ```
 
-The $2 above is an example operator-selected maximum for the batch, not a quoted price. The cap is divided across brand runs. Collection is resumable: a running status asks you to collect later without starting a second scrape. Failed runs save a receipt and do not masquerade as complete data. If the initial POST has an uncertain network result, inspect Apify Runs before trying again. Page IDs, ad IDs, raw rows, capture time and run/dataset IDs are retained locally. Raw ads are excluded from Git and the static build.
-
-5. Alternatively, import a downloaded Apify JSON export without paying for another run:
-
-```sh
-python3 engine.py normalize --raw examples/raw-ads.json --brand examples/reference-brand.json --out runs/fixture-references.json
-python3 engine.py brief --references runs/fixture-references.json --brand examples/brand.json --out runs/creative-brief.json
-```
-
-The fixture is synthetic, not evidence of an actual advertiser. For production use, replace both fixture files with your real export and verified page record.
-
-6. Generate three original concepts using your connected assistant and the resulting brief, or use the optional API adapter. The dry run prints a prompt. The paid run needs `OPENAI_API_KEY` and an explicitly selected `TEXT_MODEL` supporting Chat Completions JSON mode. No model price or availability is assumed.
-
-```sh
-python3 scripts/generate_copy.py --brief runs/creative-brief.json --out runs/concepts.json
-# Paid API call, only when intended:
-python3 scripts/generate_copy.py --brief runs/creative-brief.json --out runs/concepts.json --execute
-```
-
-7. Render PNGs with the included typography template, or create original images in Canva/image tools and populate the same pack schema. Install rendering dependencies in a virtual environment. Obtain Sarabun from its official font source and pass its local TTF path.
+การแก้ headline หรือสีเว็บ **ไม่เปลี่ยนตัวหนังสือที่อยู่ในภาพเดิม** ต้องเปลี่ยนภาพจาก Canva หรือ render ใหม่ด้วยคำสั่งด้านล่าง
 
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python scripts/render_pack.py --concepts examples/concepts.json --font /absolute/path/Sarabun-Bold.ttf --out runs/rendered-demo
+.venv/bin/python student.py render --font /absolute/path/Sarabun-Bold.ttf --out runs/my-new-project
+python3 student.py preview --project runs/my-new-project
 ```
 
-The renderer creates actual 1080×1350 PNGs, individual JSON packs and `catalog.json`. It resets status to draft. It does not create photos or imitate reference brand identities. Human visual review is required, especially for Thai wrapping. For carousels, list every PNG in `assets` with consecutive `order` values; ZIPs preserve that order. Video reference viewing works; video launch packaging is a future extension.
+ดาวน์โหลดฟอนต์ Sarabun จาก [Google Fonts](https://fonts.google.com/specimen/Sarabun) แล้วใช้ path ของไฟล์ TTF จริง คำสั่งนี้สร้างสำเนาโปรเจกต์ใหม่พร้อมภาพ 1080×1350 ใช้ชื่อธุรกิจ headline CTA และสีที่คุณตั้งไว้ ตรวจคำตัดบรรทัดและความอ่านง่ายก่อนใช้ เลือกโฟลเดอร์ใหม่ทุกครั้ง
 
-8. Check each real pack, then record the human review into a new file. Demo packs cannot be approved. A changed caption, claim, destination or asset invalidates the approval hash.
+## จากตัวอย่างสู่แพ็กแอดจริง
+
+ตัวอย่างตั้ง `demo: true` ไว้เพื่อฝึกใช้งาน เมื่อเปลี่ยนเป็นข้อเสนอจริง ภาพที่มีสิทธิ์ใช้ แคปชั่นจริง และลิงก์จริงครบแล้ว จึงตั้ง `demo: false` พร้อมแก้ `rights` และ `rights_evidence` ให้ตรงกับงาน ห้ามใช้หลักฐานสิทธิ์ของตัวอย่างกับภาพที่เพิ่งนำเข้ามา
 
 ```sh
-python3 engine.py validate --pack runs/rendered/AD-ID.json --root runs/rendered
-python3 scripts/approve_pack.py --pack runs/rendered/AD-ID.json --root runs/rendered --out runs/rendered/AD-ID-approved.json --reviewer "Actual reviewer name" --confirm-reviewed
-python3 engine.py export --pack runs/rendered/AD-ID-approved.json --root runs/rendered --out runs/AD-ID-launch-pack.zip
+python3 student.py check
+python3 student.py pack --id my-ad-04 --out runs/my-ad-04.json
+python3 engine.py validate --pack runs/my-ad-04.json --root student/assets
 ```
 
-Before using `--confirm-reviewed`, the named person must actually inspect the image, caption, offer, claims, rights and destination. This records a review; it does not make a campaign live. The archive includes ordered PNGs, verbatim caption, headline, destination/CTA, proof, approval metadata and manifest.
-
-9. Assemble chosen pack objects and reference records into one JSON array, then build the gallery. Use the approved JSON object, not the previous draft object, in that array. All original asset paths are relative to `--pack-root`; copy or organize the files there. Every build needs a fresh output directory.
+ให้ผู้ตรวจเปิดภาพและอ่าน caption ข้อเสนอ หลักฐาน CTA และปลายทางจริงก่อนบันทึก review:
 
 ```sh
-python3 engine.py build --catalog private/catalog.json --pack-root private/assets --out builds/student-cohort-01
+python3 scripts/approve_pack.py --pack runs/my-ad-04.json --root student/assets --out runs/my-ad-04-approved.json --reviewer "ชื่อผู้ตรวจจริง" --confirm-reviewed
+python3 engine.py export --pack runs/my-ad-04-approved.json --root student/assets --out runs/my-ad-04-launch-pack.zip
 ```
 
-Only approved original packs get ZIP download links. Drafts stay visibly draft; competitor references remain study-only. Serve only the build output. Do not deploy the repository root. `vercel.json` builds the demo into `dist/`; deployment and student access are deliberately manual. A private GitHub repo does not make a Vercel site private. The static MVP has no student login, per-student data isolation or durable favorites.
+ZIP มีภาพตามลำดับ แคปชั่น หัวข้อ และข้อมูลสำหรับตั้งแอด การแก้เนื้อหาหลัง review ทำให้ approval เดิมใช้ไม่ได้ หากใช้ `--project` อื่น ให้ใช้โฟลเดอร์ `assets` ของโปรเจกต์นั้นเป็น `--root`
 
-## Repository map
+หน้า preview สำหรับแก้ไขจะสร้างทุกแอดเป็น **draft** เสมอ หากต้องการหน้าแจกนักเรียนที่มีปุ่มดาวน์โหลด ให้รวม approved pack JSON เป็น array แล้วใช้คำสั่ง build ใน [คู่มือผู้ดูแล](docs/OPERATOR-GUIDE.md) ระบบไม่เปิดแคมเปญหรือใช้เงินยิงแอดให้เอง
 
-- `engine.py`: dry-run/paid scrape, receipt collection, normalization, brief assembly, legacy migration, pack QA, ZIP export and static build.
-- `scripts/`: original copy generation, PNG rendering and recorded human approval.
-- `web/`: Thai mobile-friendly gallery, search, angle/status filters, modal, caption copying and downloads.
-- `legacy/`: exact original HTML/JS/CSS and the 675-entry manifest for migration/audit. Media is external.
-- `examples/`: synthetic scraper fixture, brand profile, original demo concepts and rendered PNGs.
-- `docs/PROCESS-TH.md`: operator and student handbook, architecture, curriculum, rollout and limitations.
-- `docs/source-audit.json`: verified source match and SHA-256 checksums.
-- `tests/`: export integrity, approval invalidation, identity checking, deduplication, safe builds and file safeguards.
-- `.github/workflows/check.yml`: offline tests and a downloadable static preview artifact. No scraping schedule or deployment.
+## เก็บแอดคู่แข่งและแบรนด์ต้นแบบ
 
-## What's verified and what's still manual
+เริ่มจากคู่แข่ง 3 รายและแบรนด์ต้นแบบ 2 รายใน `student/watchlist.json` ตรวจ exact Meta page ID ก่อนเปิด `enabled` และ `identity_verified` รายการเริ่มต้นยังปิดอยู่และไม่มี page ID
 
-Implemented and locally tested: normalization, deduplication, source retention, draft generation contract, PNG rendering, legacy migration, filters, caption copy, validation, approval hash, ZIP integrity and safe static build. Paid Apify execution and paid OpenAI generation are adapter code verified against current documentation; they have not been exercised with paid live calls in this delivery. There is no autonomous end-to-end image generation, campaign launch, conversion measurement, authentication or scheduled refresh.
+```sh
+# แสดงแผนเท่านั้น ไม่เรียก paid scrape
+python3 engine.py scrape --watchlist student/watchlist.json
+```
 
-The complete historical creative-generation environment was not recovered from the deployed website. The legacy source and scripts show how the gallery was assembled; the new engine supplies a reproducible standard workflow. Do not infer competitor performance, ROAS or conversion rate from how long an ad is visible.
+ขั้นตอน scrape จริงพร้อมงบสูงสุด, collect, import JSON, normalize และสร้าง brief อยู่ใน [คู่มือผู้ดูแล](docs/OPERATOR-GUIDE.md) ใส่ผล normalize เป็น JSON array ใน `student/references.json` แอดอ้างอิงใช้ศึกษา hook/mุมขาย แล้วสร้างภาพและข้อความของธุรกิจคุณเอง
+
+## นำเว็บของตัวเองขึ้น Vercel
+
+รัน `python3 student.py check` ก่อน จากนั้น import **repo ของคุณ** เข้า Vercel ค่าที่เตรียมไว้จะ build จาก `student/` ไปยัง `dist/` โดยอัตโนมัติ ดู Preview Deployment แล้วค่อยเลือกเผยแพร่ เมื่อแก้ไฟล์และ push Vercel จะ build ตามการตั้งค่าของคุณ
+
+```sh
+python3 student.py build --out builds/my-gallery
+```
+
+build ต้องใช้โฟลเดอร์ใหม่ เว็บที่เผยแพร่เป็น static ไม่มี login นักเรียนหรือพื้นที่ส่วนตัว ใช้ข้อมูลที่ตั้งใจให้ผู้เปิดเว็บเห็น Private GitHub repo ไม่ได้ทำให้เว็บ Vercel เป็น private
+
+## สำหรับคนอยากต่อยอด
+
+- เพิ่มฟอร์มแก้แคปชั่น เพิ่มหมวดธุรกิจ หรือเปลี่ยน layout ใน `web/` ได้ทั้งหมด
+- คลังเดิม 675 รายการเก็บแยกใน `legacy/` เพื่อศึกษาและ migrate ไม่ถูกโหลดในเว็บของนักเรียนโดยอัตโนมัติ
+- รัน `python3 -m unittest discover -s tests -v` ก่อน push ทุกครั้ง GitHub Actions ตรวจระบบและแนบ static build ให้ด้วย
+- เก็บ API keys ใน environment เท่านั้น โฟลเดอร์ `private/`, `runs/`, `builds/` และไฟล์ `.env` ไม่ขึ้น Git ตาม `.gitignore`
+- Paid Apify/OpenAI adapters ยังไม่ได้ทดสอบด้วยการใช้เงินจริงในชุดส่งมอบนี้ ไม่มีระบบ refresh ตามเวลา แคมเปญอัตโนมัติ หรือการวัด ROAS
 
 ## License
 
-Source code uses the original MIT license. That license does not grant rights to advertiser creatives, original-gallery imagery, personal likenesses, trademarks or third-party fonts. The three demo layouts/captions are original training examples. Use references to study mechanics and create your own work.
-
-## Sources
-
-[Original gallery](https://limitless-ad-gallery-deploy.vercel.app/) · [Original repository](https://github.com/jetlauncher/limitless-ad-system) · [Apify actor input](https://apify.com/apify/facebook-ads-scraper/input) · [Run API](https://docs.apify.com/api/v2/actors-runs-post) · [Dataset pagination](https://docs.apify.com/api/v2/dataset-items-get)
+Source และเอกสารใช้ [MIT](LICENSE) นักเรียนแก้ไขและต่อยอดเชิงพาณิชย์ได้โดยเก็บ license notice ไว้ สิทธิ์นี้ไม่ครอบคลุมสื่อแบรนด์อื่น ภาพในคลังเก่า โลโก้ หน้าคน หรือฟอนต์ของบุคคลที่สาม

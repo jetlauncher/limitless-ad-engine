@@ -11,3 +11,12 @@ function open(ad){selected=ad;lastFocus=document.activeElement;$('#detail-title'
 $('#close').onclick=()=>$('#detail').close();$('#detail').addEventListener('close',()=>lastFocus?.focus());$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(selected.caption);$('#message').textContent='คัดลอกแคปชั่นแล้ว';}catch{$('#message').textContent='คัดลอกอัตโนมัติไม่ได้ ให้เลือกข้อความด้านบนแล้วคัดลอก';}};
 document.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>{kind=b.dataset.kind;document.querySelectorAll('[data-kind]').forEach(t=>t.classList.toggle('active',t===b));filter();});['search','angle','status'].forEach(id=>$('#'+id).addEventListener(id==='search'?'input':'change',filter));$('#more').onclick=()=>{limit+=36;render();};
 fetch('catalog.json').then(r=>{if(!r.ok)throw Error('load');return r.json();}).then(data=>{ads=data;[...new Set(ads.map(a=>a.angle))].sort().forEach(a=>{const o=node('option',a);o.value=a;$('#angle').append(o);});filter();}).catch(()=>{$('#count').textContent='โหลดคลังแอดไม่ได้ ลองรีเฟรชหน้า หรือติดต่อทีมดูแล';});
+
+// Students change these labels and colors in student/site.json, not in this script.
+fetch('site.json').then(r=>{if(!r.ok)return null;return r.json();}).then(site=>{
+  if(!site)return;
+  document.title=site.name+' · '+site.subtitle;
+  const labels={'#brand-name':'name','#brand-subtitle':'subtitle','.eyebrow':'eyebrow','.intro h1':'headline','.intro > div > p:last-child':'description','footer':'footer'};
+  for(const [selector,key] of Object.entries(labels)){const element=$(selector);if(element&&typeof site[key]==='string')element.textContent=site[key];}
+  for(const [key,value] of Object.entries(site.colors||{})){if(['bg','surface','gold','ink','muted','line'].includes(key)&&/^#[0-9a-fA-F]{6}$/.test(value))document.documentElement.style.setProperty('--'+key,value);}
+}).catch(()=>{});
