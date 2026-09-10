@@ -1,0 +1,28 @@
+{
+  "id": "demo-03",
+  "title": "ให้ทีมเดินต่อ โดยไม่รอคุณ",
+  "headline": "ให้ทีมเดินต่อ\nโดยไม่รอคุณ",
+  "angle": "Reframe",
+  "caption": "ถ้าทุกคำตอบต้องรอเจ้าของ ทีมก็เดินได้เท่าที่เจ้าของว่าง\n\nลองรวบรวมคำถามที่ทีมถามซ้ำ แล้วเขียนหลักการตัดสินใจไว้ให้ค้นหาได้\n\nตัวอย่างสาธิตสำหรับฝึกเขียนแอด ไม่มีการเปิดขายจริง",
+  "brand": "ธุรกิจตัวอย่าง",
+  "kind": "original",
+  "status": "draft",
+  "demo": true,
+  "cta": "ดูวิธีเริ่มต้น",
+  "destination": "https://example.com/",
+  "proof": "ตัวอย่างสาธิต ไม่มีผลลัพธ์ลูกค้าจริง",
+  "source_ids": [],
+  "visual_brief": "Original typography-led layout",
+  "assets": [
+    {
+      "path": "demo-03.png",
+      "kind": "image",
+      "order": 1,
+      "width": 1080,
+      "height": 1350,
+      "sha256": "00708eb54b9fb04b392fac0a57047235e50bcbda50ba098969ba274fd35d38d7"
+    }
+  ],
+  "rights": "owned",
+  "rights_evidence": "Original typography layout rendered from supplied brand copy; reviewer must verify copy rights and claims."
+}

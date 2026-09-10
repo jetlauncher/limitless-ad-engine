@@ -1,0 +1,28 @@
+{
+  "id": "demo-01",
+  "title": "งานซ้ำกินเวลา เจ้าของทุกวัน",
+  "headline": "งานซ้ำกินเวลา\nเจ้าของทุกวัน",
+  "angle": "Pain",
+  "caption": "ลองจดงานที่คุณต้องทำซ้ำในสัปดาห์นี้\n\nเลือกหนึ่งงานที่ขั้นตอนชัด แล้วออกแบบวิธีส่งต่องานให้ทีมและ AI ช่วยกันทำ\n\nตัวอย่างสาธิตสำหรับฝึกเขียนแอด ไม่มีการเปิดขายจริง",
+  "brand": "ธุรกิจตัวอย่าง",
+  "kind": "original",
+  "status": "draft",
+  "demo": true,
+  "cta": "ดูวิธีเริ่มต้น",
+  "destination": "https://example.com/",
+  "proof": "ตัวอย่างสาธิต ไม่มีผลลัพธ์ลูกค้าจริง",
+  "source_ids": [],
+  "visual_brief": "Original typography-led layout",
+  "assets": [
+    {
+      "path": "demo-01.png",
+      "kind": "image",
+      "order": 1,
+      "width": 1080,
+      "height": 1350,
+      "sha256": "79c5ebf84517cec322c1bceed712dae4cf872482296d855e3d36d15571d8c169"
+    }
+  ],
+  "rights": "owned",
+  "rights_evidence": "Original typography layout rendered from supplied brand copy; reviewer must verify copy rights and claims."
+}

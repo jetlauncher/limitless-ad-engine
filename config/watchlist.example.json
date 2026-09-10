@@ -1,0 +1,6 @@
+[
+  {"id":"skilllane","name":"SkillLane","relationship":"competitor","country":"TH","page_id":"","identity_verified":false,"enabled":false,"limit":30},
+  {"id":"skooldio","name":"Skooldio","relationship":"competitor","country":"TH","page_id":"","identity_verified":false,"enabled":false,"limit":30},
+  {"id":"digital-tips","name":"Digital Tips Academy","relationship":"competitor","country":"TH","page_id":"","identity_verified":false,"enabled":false,"limit":30},
+  {"id":"aspiration-brand","name":"Choose a brand whose advertising you admire","relationship":"aspiration","country":"ALL","page_id":"","identity_verified":false,"enabled":false,"limit":30}
+]

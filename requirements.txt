@@ -1,0 +1,2 @@
+# Core pipeline and tests use Python standard library. Only PNG rendering needs Pillow.
+Pillow>=11,<13

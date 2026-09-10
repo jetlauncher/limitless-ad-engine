@@ -1,0 +1,28 @@
+{
+  "id": "demo-02",
+  "title": "เลือกหนึ่งงาน วางหนึ่งระบบ",
+  "headline": "เลือกหนึ่งงาน\nวางหนึ่งระบบ",
+  "angle": "Mechanism",
+  "caption": "เริ่มจากงานจริงหนึ่งชิ้น\nระบุข้อมูลที่ต้องใช้ ขั้นตอนที่ต้องทำ และผลลัพธ์ที่ต้องตรวจ\n\nคุณจะเห็นชัดขึ้นว่างานส่วนไหนให้ AI ช่วยได้ และส่วนไหนยังต้องให้คนตัดสินใจ\n\nตัวอย่างสาธิตสำหรับฝึกเขียนแอด ไม่มีการเปิดขายจริง",
+  "brand": "ธุรกิจตัวอย่าง",
+  "kind": "original",
+  "status": "draft",
+  "demo": true,
+  "cta": "ดูวิธีเริ่มต้น",
+  "destination": "https://example.com/",
+  "proof": "ตัวอย่างสาธิต ไม่มีผลลัพธ์ลูกค้าจริง",
+  "source_ids": [],
+  "visual_brief": "Original typography-led layout",
+  "assets": [
+    {
+      "path": "demo-02.png",
+      "kind": "image",
+      "order": 1,
+      "width": 1080,
+      "height": 1350,
+      "sha256": "78a07d1c8aa1fe07f41bc5e70df7a5108c6e737907cc8c04c94cc204a468d791"
+    }
+  ],
+  "rights": "owned",
+  "rights_evidence": "Original typography layout rendered from supplied brand copy; reviewer must verify copy rights and claims."
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad Creative Review — AI Agent Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-label">Creative Review</span>
+        <h1 class="header-title">AI Agent Workshop</h1>
+      </div>
+      <div class="header-right">
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-value" id="stat-total">33</span>
+            <span class="stat-label">total ads</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-alt">30</span>
+            <span class="stat-label">alternatives</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-visible">33</span>
+            <span class="stat-label">showing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls-bar">
+    <div class="controls-inner">
+      <div class="family-toggle" role="group" aria-label="Ad family">
+        <button class="family-btn active" data-family="all">All</button>
+        <button class="family-btn" data-family="Originals">Originals</button>
+        <button class="family-btn" data-family="Alternatives">Alternatives</button>
+        <button class="family-btn" data-family="Carousels">Carousels</button>
+      </div>
+      <div class="angle-filters" id="angle-filters" role="group" aria-label="Filter by angle">
+        <button class="angle-chip active" data-angle="all">All angles</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="grid-container">
+    <div class="ad-grid" id="ad-grid"></div>
+    <div class="empty-state" id="empty-state" hidden>
+      <span class="empty-icon">◻</span>
+      <p>No ads match the current filters.</p>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-label="Ad detail" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <button class="modal-nav modal-prev" id="modal-prev" aria-label="Previous">‹</button>
+      <button class="modal-nav modal-next" id="modal-next" aria-label="Next">›</button>
+
+      <div class="modal-image-wrap">
+        <img class="modal-image" id="modal-image" src="" alt="" />
+      </div>
+
+      <div class="modal-meta">
+        <div class="modal-meta-top">
+          <span class="modal-family-badge" id="modal-family"></span>
+          <span class="modal-counter" id="modal-counter"></span>
+        </div>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-fields" id="modal-fields"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

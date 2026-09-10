@@ -1,0 +1,5 @@
+{
+  "buildCommand": "python3 engine.py build --catalog examples/rendered/catalog.json --pack-root examples/rendered --legacy legacy/manifest.json --out dist",
+  "outputDirectory": "dist",
+  "headers": [{"source":"/(.*)","headers":[{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"}]}]
+}

@@ -1,0 +1,35 @@
+{
+  "source_url": "https://limitless-ad-gallery-deploy.vercel.app/",
+  "existing_repository": "https://github.com/jetlauncher/limitless-ad-system",
+  "verified_at": "2026-09-10",
+  "entries": 675,
+  "with_caption": 321,
+  "without_caption": 354,
+  "families": {
+    "Originals": 4,
+    "Alternatives": 664,
+    "Carousels": 7
+  },
+  "files": {
+    "index.html": {
+      "sha256": "00f9ba91e4c17cd016523d010740abf6980f7ce6e7e97b5ee5bd2df9ee5d0199",
+      "bytes": 3380,
+      "live_equal": true
+    },
+    "app.js": {
+      "sha256": "68e4f46ba32c20282d8796f181b0666fc8df83831960c6805beed29e04099a3a",
+      "bytes": 10046,
+      "live_equal": true
+    },
+    "styles.css": {
+      "sha256": "52c25b256910baf4634dedb5a66143ee6936373c7bd8abf14bdb93278da5396c",
+      "bytes": 14574,
+      "live_equal": true
+    },
+    "manifest.json": {
+      "sha256": "ac2dd3635760ede6f2185c5f2a842532af22fe0a613c31cc86aec07814d1799f",
+      "bytes": 490396,
+      "live_equal": true
+    }
+  }
+}

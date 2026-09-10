@@ -1,0 +1,5 @@
+[
+ {"adArchiveID":"987654321","pageID":"123456789","isActive":true,"startDateFormatted":"2026-01-01","snapshot":{"title":"Synthetic ad fixture","body":{"text":"นี่คือข้อมูลทดสอบ\nไม่ได้ดึงมาจากแอดจริง"},"ctaText":"Learn more","linkUrl":"https://example.com/","images":[]}},
+ {"adArchiveID":"987654321","pageID":"123456789","isActive":true,"snapshot":{"title":"Synthetic duplicate fixture","body":{"text":"นี่คือข้อมูลทดสอบ\nไม่ได้ดึงมาจากแอดจริง"},"images":[]}},
+ {"adArchiveID":"555555555","pageID":"111111111","snapshot":{"body":{"text":"Wrong advertiser fixture"}}}
+]
